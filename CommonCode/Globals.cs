@@ -12,5 +12,6 @@ namespace WindowsAppBase
         private static DomainCode.SampleProject project = new SampleProject();
 
         public static SampleProject Project { get => project; set => project = value; }
+
     }
 }

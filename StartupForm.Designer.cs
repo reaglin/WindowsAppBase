@@ -34,6 +34,8 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDisplay = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -58,7 +60,7 @@
             // btnOpen
             // 
             this.btnOpen.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnOpen.Location = new System.Drawing.Point(581, 199);
+            this.btnOpen.Location = new System.Drawing.Point(581, 243);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(163, 52);
             this.btnOpen.TabIndex = 2;
@@ -69,7 +71,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(581, 280);
+            this.btnSave.Location = new System.Drawing.Point(581, 301);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(163, 52);
             this.btnSave.TabIndex = 3;
@@ -88,11 +90,35 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnEdit.Location = new System.Drawing.Point(581, 185);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(163, 52);
+            this.btnEdit.TabIndex = 5;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDisplay
+            // 
+            this.btnDisplay.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDisplay.Location = new System.Drawing.Point(581, 127);
+            this.btnDisplay.Name = "btnDisplay";
+            this.btnDisplay.Size = new System.Drawing.Size(163, 52);
+            this.btnDisplay.TabIndex = 6;
+            this.btnDisplay.Text = "Display";
+            this.btnDisplay.UseVisualStyleBackColor = true;
+            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
+            // 
             // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnDisplay);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnOpen);
@@ -113,5 +139,7 @@
         private Button btnOpen;
         private Button btnSave;
         private Button btnExit;
+        private Button btnEdit;
+        private Button btnDisplay;
     }
 }

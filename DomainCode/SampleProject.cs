@@ -51,6 +51,22 @@ namespace WindowsAppBase.DomainCode
             return Application.ProductVersion;
         }
 
+        public SampleObject theObject()
+        {
+            return anObject;
+        }
+
+        public void PullValues(SampleObject passedObject)
+        {
+            // This will populate the values of the internal global object into the passed object.
+            anObject.PullValues(passedObject);
+        }
+
+        public void PushValues(SampleObject passedObject)
+        {
+            anObject.PushValues(passedObject);
+        }
+
 
         #region "Project Interface Routines"
 

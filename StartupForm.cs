@@ -25,8 +25,7 @@ namespace WindowsAppBase
                 string fileName = dlg.FileName;
                 OpenFile(fileName);
                 
-            }
-            
+            }           
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -52,6 +51,19 @@ namespace WindowsAppBase
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            Form form = new Forms.frmEditObject();
+            form.ShowDialog();
+
+            textBox1.Text = Globals.Project.AsXML();
+        }
+
+        private void btnDisplay_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = Globals.Project.AsXML();
         }
     }
 }

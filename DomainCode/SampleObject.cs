@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WindowsAppBase.DomainCode
 {
-    internal class SampleObject : XmlPropertyObject
+    public class SampleObject : XmlPropertyObject
     {
         #region "Properties"
-        String aString { get; set; }
-        Double aDouble { get; set; }
+        public String aString { get; set; }
+        public Double aDouble { get; set; }
 
-        int aInt { get; set; }
+        public int aInt { get; set; }
         #endregion
 
         #region Constructor
@@ -44,5 +44,22 @@ namespace WindowsAppBase.DomainCode
         }
         #endregion
 
+#region "Populate and Retrieve"
+        public void PushValues(SampleObject passedObject)
+        {
+            // Pushes Values to the Passed Object
+            passedObject.aString = aString;
+            passedObject.aDouble = aDouble; 
+            passedObject.aInt = aInt;
+        }
+
+        public void PullValues(SampleObject passedObject)
+        {
+            // Pulls Values from the Passed Obejct
+            aString = passedObject.aString;
+            aDouble = passedObject.aDouble;
+            aInt = passedObject.aInt;
+        }
+        #endregion
     }
 }
