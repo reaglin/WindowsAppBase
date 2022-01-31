@@ -35,7 +35,7 @@ namespace WindowsAppBase.Forms
             // Getting Values from Text Boxes
             getValuesFromForm();
 
-            // Update teh Global Object
+            // Update the Global Object
             Globals.Project.PullValues(theObject);  
         }
 
