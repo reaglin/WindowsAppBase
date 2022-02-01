@@ -24,7 +24,7 @@ namespace WindowsAppBase.DomainCode
 
         #endregion
 
-
+        public const string FileFilter = "Project files(*.extension)|*.extension";
         private SampleObject anObject; 
 
         bool Modified { get; set; }
@@ -40,6 +40,11 @@ namespace WindowsAppBase.DomainCode
 
             Modified = false;
         }
+
+        #region "Static Methods"
+
+
+        #endregion
 
         public string Version()
         {
@@ -175,6 +180,8 @@ namespace WindowsAppBase.DomainCode
             anObject.fromXML(doc.Descendants("SampleObject").FirstOrDefault().ToString());
         }
 
+
+
         // Samples of getting an XMLPropertyObject from XML
 
         //private void getCatchmentsFromXML(XDocument doc)
@@ -217,6 +224,39 @@ namespace WindowsAppBase.DomainCode
 
             return saveToFile(filename);            
         }
+        public string WorkingDirectory()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\BMP Trains";
+            Directory.CreateDirectory(path);
+            return path;
+        }
+        public string Open()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.InitialDirectory = this.WorkingDirectory();
+            dlg.Filter = DomainCode.SampleProject.FileFilter;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = dlg.FileName;
+                return this.Open(fileName);
+            }
+            return "";
+        }
+
+        public string Open(String filename)
+        {
+            string res = this.openFromFile(filename);
+            if (res == "")
+            {
+                this.FileName = filename;
+            }
+            else
+            {
+                MessageBox.Show(res);
+            }
+            return this.AsXML();
+        }
 
         public string openFromFile(string filename)
         {    
@@ -243,28 +283,24 @@ namespace WindowsAppBase.DomainCode
         }
         #endregion
 
-        #region "Output Reporting"
-        public override Dictionary<string, int> PropertyDecimalPlaces()
-        {
-            return new Dictionary<string, int>
-                {
-                    {"MeanAnnualRainfall", 2}
-                };
-        }
+        #region "Output Reporting (Required Abstract Methods)"
 
         public override Dictionary<string, string> PropertyLabels()
         {
+            // Syntax: ProepertyName, Property Label
             return new Dictionary<string, string>
                 {
                     {"ProjectName", "Project Name"},
-                    {"FileName", "Project File Name"},
-                    {"RainfallZone", "Rainfall Zone"},
-                    {"MeanAnnualRainfall", "Mean Annual Rainfall (in)"},
-                    {"AnalysisType", "Analysis Type"},
-                    {"RequiredNTreatmentEfficiency", "Required Nitrogen Removal Efficiency (%)"},
-                    {"RequiredPTreatmentEfficiency", "Required Phosphorus Removal Efficiency (%)"},
-                    {"CatchmentConfiguration", "Catchment Configuration"}
+                    {"FileName", "Project File Name"}
             };
+        }
+        public override Dictionary<string, int> PropertyDecimalPlaces()
+        {
+            // Syntax: Property Name, Default Decimal places for display
+            return new Dictionary<string, int>
+                {
+                    {"AnyFloat", 2}
+                };
         }
 
         public new string AsHtmlTable()

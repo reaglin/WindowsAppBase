@@ -122,6 +122,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 164);
+            this.ControlBox = false;
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.tbAInt);
@@ -130,6 +131,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbAString);
             this.Controls.Add(this.lblAString);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmEditObject";
             this.Text = "Edit Object";
             this.Load += new System.EventHandler(this.frmAnObject_Load);

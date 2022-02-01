@@ -15,17 +15,7 @@ namespace WindowsAppBase
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = DomainCode.Common.WorkingDirectory();
-
-            dlg.Filter = "Project files (*.extension)|*.extension";
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = dlg.FileName;
-                OpenFile(fileName);
-                
-            }           
+            textBox1.Text = Globals.Project.Open();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
