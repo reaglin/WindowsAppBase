@@ -154,15 +154,25 @@ namespace WindowsAppBase.DomainCode
             ClearProperties();
             // This will get all root elements of the current object
             XmlDeserialize(doc);
+            getSampleObjectFromXML(doc);
 
+            // Examples of other approaches of collections of objects
             //getCatchmentsFromXML(doc);
-            //getCostScenariosFromXML(doc);
+
         }
 
         public new void ClearProperties()
         {
             // Code to reset or clear all properties
             base.ClearProperties();
+        }
+
+        private void getSampleObjectFromXML(XDocument doc) 
+        {
+            if (doc.Descendants("SampleObject") == null) return;
+            // Assumes ONLY 1 Sample Object - but can be used for any embedded xml string
+            // representing and object values. 
+            anObject.fromXML(doc.Descendants("SampleObject").FirstOrDefault().ToString());
         }
 
         // Samples of getting an XMLPropertyObject from XML
@@ -179,17 +189,6 @@ namespace WindowsAppBase.DomainCode
         //    }
         //}
 
-        //private void getCostScenariosFromXML(XDocument doc)
-        //{
-        //    // Now to get each subelement Catchments
-        //    var XElements = doc.Descendants().Where(p => p.Name.LocalName == "CostScenario");
-        //    foreach (XElement element in XElements)
-        //    {
-        //        int id = Convert.ToInt32(element.FirstAttribute.Value);
-        //        CostScenario c = getCostScenario(id);
-        //        c.fromXML(element.ToString());
-        //    }
-        //}
 
 
         #endregion
