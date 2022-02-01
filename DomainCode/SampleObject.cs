@@ -11,7 +11,6 @@ namespace WindowsAppBase.DomainCode
         #region "Properties"
         public String aString { get; set; }
         public Double aDouble { get; set; }
-
         public int aInt { get; set; }
         #endregion
 

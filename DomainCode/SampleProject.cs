@@ -16,25 +16,24 @@ namespace WindowsAppBase.DomainCode
         // All Properties here are project global accessible through Globals.project
 
         public const string SessionId = "ProjectID";
-        
         public string ProjectName { get; set; }
         public string FileName { get; set; }
-
-        public string FileExtension { get; set; }
-
-        #endregion
+        public string DefaultFileExtension { get; set; }
 
         public const string FileFilter = "Project files(*.extension)|*.extension";
-        private SampleObject anObject; 
 
+        public const string DefaultWorkingDirectory = "//BMP Trains";
+
+        private SampleObject anObject; 
         bool Modified { get; set; }
-        
+        #endregion
+
         // Constructor
         public SampleProject()
         {
             ProjectName = "Default";
             FileName = "Default.extension";
-            FileExtension = "extension";
+            DefaultFileExtension = "extension";
 
             anObject = new SampleObject();
 
@@ -56,11 +55,15 @@ namespace WindowsAppBase.DomainCode
             return Application.ProductVersion;
         }
 
+        // This is an example - SampleObject is simply a Sample for demonstration 
+        // purposes. 
         public SampleObject theObject()
         {
             return anObject;
         }
 
+        // These can be created by any property that is an object in SampleProject
+        // use the passed value as any object and they will be polymorphic
         public void PullValues(SampleObject passedObject)
         {
             // This will populate the values of the internal global object into the passed object.
@@ -89,7 +92,7 @@ namespace WindowsAppBase.DomainCode
 
             savefile.FileName = Globals.Project.getFileName();
             // set filters - this can be done in properties as well
-            savefile.Filter = "Project Files (*." + FileExtension + ")|*." + FileExtension + "|All files (*.*)|*.*";
+            savefile.Filter = "Project Files (*." + DefaultFileExtension + ")|*." + DefaultFileExtension + "|All files (*.*)|*.*";
 
             if (savefile.ShowDialog() == DialogResult.OK)
             {
@@ -172,12 +175,32 @@ namespace WindowsAppBase.DomainCode
             base.ClearProperties();
         }
 
+
+        public void populateObjectFromXDocument(XmlPropertyObject obj,  XDocument doc)
+        {
+            // An Object obj that is a child of class XmlPropertyObject 
+            // can be populated from XML. This will poplate that object
+            
+            // Get the Class name from the passed object
+            String objName = System.ComponentModel.TypeDescriptor.GetClassName(obj);
+            objName = objName.Substring(objName.LastIndexOf(".") + 1);
+
+            // Get the first instance of the xml wrappered by the class name
+            // in the XML document
+
+            if (doc.Descendants(objName) == null) return;
+            obj.fromXML(doc.Descendants(objName).FirstOrDefault().ToString());
+        }
+
         private void getSampleObjectFromXML(XDocument doc) 
         {
-            if (doc.Descendants("SampleObject") == null) return;
+            // This is not really needed, it only redirects a call to 
+            populateObjectFromXDocument(anObject, doc);
+            //populateObjectFromXDocument(anObject, "SampleObject", doc);
+            //if (doc.Descendants("SampleObject") == null) return;
             // Assumes ONLY 1 Sample Object - but can be used for any embedded xml string
             // representing and object values. 
-            anObject.fromXML(doc.Descendants("SampleObject").FirstOrDefault().ToString());
+            //anObject.fromXML(doc.Descendants("SampleObject").FirstOrDefault().ToString());
         }
 
 
@@ -226,7 +249,7 @@ namespace WindowsAppBase.DomainCode
         }
         public string WorkingDirectory()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\BMP Trains";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + DefaultWorkingDirectory; // "\\BMP Trains";
             Directory.CreateDirectory(path);
             return path;
         }
