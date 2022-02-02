@@ -218,9 +218,6 @@ namespace WindowsAppBase.DomainCode
         //        c.fromXML(element.ToString());
         //    }
         //}
-
-
-
         #endregion
 
         #region "File Open and Save - Embedded Object Independent"
@@ -266,7 +263,6 @@ namespace WindowsAppBase.DomainCode
             }
             return "";
         }
-
         public string Open(String filename)
         {
             string res = this.openFromFile(filename);
@@ -280,7 +276,6 @@ namespace WindowsAppBase.DomainCode
             }
             return this.AsXML();
         }
-
         public string openFromFile(string filename)
         {    
                 //try
